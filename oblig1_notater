@@ -1,0 +1,9 @@
+Rushour 
+	
+	miljø:
+		objekt:
+			modell: (O, X, Y, S)
+			(O)rientering: 0: Horisontal bevegelse, 1: Vertikale bevegelse
+			X, Y: koordinater
+			S: størrelse
+	
