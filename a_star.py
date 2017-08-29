@@ -18,6 +18,7 @@ class BestFirst:
         self.solution_fn = solution_fn
 
         self.expand_counter = 0
+        self.n_nodes_generated = 0
 
         self.graph = graph
         # initialize first node
@@ -50,6 +51,7 @@ class BestFirst:
             return
         self.expand_counter += 1  # 4
         for cn in next_node.get_children():  # 5
+            self.n_nodes_generated += 1
             if hasattr(cn, 'g'):  # 6
                 self.update_g(cn, next_node)  # 7
             else:
