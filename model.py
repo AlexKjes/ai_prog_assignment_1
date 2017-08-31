@@ -46,8 +46,7 @@ class Environment:
                 ret.append(tuple(state))
         return ret
 
-    @staticmethod
-    def h(state):
+    def h(self, state):
         """
         The heuristic function:
         Calculates how "good" the state is.
@@ -55,7 +54,7 @@ class Environment:
         :param ((int, int),) state:
         :return int:
         """
-        ret = 2**(6-state[0][0])
+        ret = 2**(self.shape[0]-state[0][0])
         return ret
 
     def is_terminal_state(self, state):

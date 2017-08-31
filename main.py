@@ -18,9 +18,9 @@ def run_a_star(difficulty=0, display_progress=False, time=None):
             env.draw_state(searcher.last_expanded.state)
             sleep(time)
 
-    print("Number of states expanded: {}".format(searcher.expand_counter))
+    print("Total number of children in search tree: {}".format(graph.n_nodes_generated))
     print("Number of nodes in graph: {}".format(len(graph.nodes)))
-    print("Total number of children in search tree: {}".format(searcher.n_nodes_generated))
+    print("Number of states expanded: {}".format(searcher.expand_counter))
     print("Steps to solution: {}".format(len(searcher.solution)))
     for node in searcher.solution:
         env.draw_state(node.state)
@@ -34,11 +34,15 @@ def simple_search(algorithm, difficulty):
     searcher = algorithms[algorithm](graph, env.is_terminal_state)
 
     solution = searcher.solve()
-    print("Number of nodes expanded: #{}".format(searcher.counter))
-    print("Number of steps to solution: #{}".format(len(solution)))
+    print("Number of nodes generated: {}".format(searcher.n_nodes_generated))
+    print("Number of unique nodes: {}".format(len(graph.nodes)))
+    print("Number of nodes expanded: {}".format(searcher.counter))
+    print("Number of steps to solution: {}".format(len(solution)))
+
     for node in solution:
         env.draw_state(node.state)
         input()
 
 
-run_a_star(difficulty=0, time=1)
+run_a_star(difficulty=0, time=.5, display_progress=True)
+#simple_search(0, 3)

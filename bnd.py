@@ -8,6 +8,8 @@ class BreadthFirst:
         self.queue = [graph.get_start_node()]
         self.solution_fn = solution_fn
         self.counter = 0
+        self.n_nodes_generated = 0
+        self.seen = [self.queue[0].state]
 
     def solve(self):
         while True:
@@ -16,10 +18,11 @@ class BreadthFirst:
                 break
             self.counter += 1
             for child in current_node.get_children():
-                if not child.is_expanded:
+                self.n_nodes_generated += 1
+                if child.state not in self.seen:
+                    self.seen.append(child.state)
                     child.prev = current_node
                     self.queue.insert(0, child)
-            current_node = self.queue.pop()
         ret = []
         while True:
             ret.insert(0, current_node)
@@ -35,6 +38,8 @@ class DepthFirst:
         self.stack = [graph.get_start_node()]
         self.solution_fn = solution_fn
         self.counter = 0
+        self.n_nodes_generated = 0
+        self.seen = [self.stack[0].state]
 
     def solve(self):
         current_node = self.stack.pop()
@@ -42,8 +47,10 @@ class DepthFirst:
         while not self.solution_fn(current_node.state):
             self.counter += 1
             for child in current_node.get_children():
-                if not child.is_expanded:
+                self.n_nodes_generated += 1
+                if child.state not in self.seen:
                     child.prev = current_node
+                    self.seen.append(child.state)
                     self.stack.append(child)
             current_node = self.stack.pop()
         ret = []

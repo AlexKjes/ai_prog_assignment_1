@@ -18,7 +18,6 @@ class BestFirst:
         self.solution_fn = solution_fn
 
         self.expand_counter = 0
-        self.n_nodes_generated = 0
 
         self.graph = graph
         # initialize first node
@@ -51,7 +50,6 @@ class BestFirst:
             return
         self.expand_counter += 1  # 4
         for cn in next_node.get_children():  # 5
-            self.n_nodes_generated += 1
             if hasattr(cn, 'g'):  # 6
                 self.update_g(cn, next_node)  # 7
             else:
@@ -96,6 +94,7 @@ class BestFirst:
         :param solution_node: The node that satisfied termination criteria
         :return [node]: returns nodes in the path from origin node to solution
         """
+        """
         ret = []
         current = solution_node
         while True:
@@ -104,7 +103,17 @@ class BestFirst:
             if current.prev is None:
                 break
         return ret
-
+        """
+        ret = []
+        current = solution_node
+        while True:
+            ret.insert(0, current)
+            parents = current.parents
+            sorted(parents, key=lambda node: node.g)
+            current = parents[0]
+            if current.g == 0:
+                break
+        return ret
 
 
 

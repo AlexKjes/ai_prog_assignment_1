@@ -8,6 +8,7 @@ class Graph:
         """
         self.node_expander = node_expander
         self.nodes = {start_node: self.Node(self, start_node)}
+        self.n_nodes_generated = 0
 
     def get_start_node(self):
         """
@@ -52,6 +53,7 @@ class Graph:
             """
             children = self._graph.node_expander(self.state)  # 1
             for child in children:
+                self._graph.n_nodes_generated += 1
                 if child in self._graph.nodes:  # 2
                     self._graph.nodes[child].parents.append(self)
                     self._children.append(self._graph.nodes[child])
