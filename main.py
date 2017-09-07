@@ -24,7 +24,7 @@ def run_a_star(difficulty=0, display_progress=False, time=None):
     print("Number of nodes in graph: {}".format(len(graph.nodes)))
     print("Number of states expanded: {}".format(searcher.expand_counter))
     print("Steps to solution: {}".format(len(searcher.solution)))
-    print("runtime: {}".format(t.time() - start))
+    print("Runtime: {}ms".format(round((t.time() - start)*1000, 2)))
     for node in searcher.solution:
         env.draw_state(node.state)
         sleep(time)
