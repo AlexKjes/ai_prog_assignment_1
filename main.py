@@ -3,11 +3,13 @@ from a_star import BestFirst
 from graph import Graph
 import bnd
 from time import sleep
+import time as t
 
 level = ['easy-3', 'medium-1', 'hard-3', 'expert-2']
 
 
 def run_a_star(difficulty=0, display_progress=False, time=None):
+    start = t.time()
     env = Environment((6, 6), 'envs/'+level[difficulty]+'.txt')
     graph = Graph(tuple([(car[1], car[2]) for car in env.cars]), env.get_successor_states)
     searcher = BestFirst(graph, env.h, env.is_terminal_state)
@@ -22,6 +24,7 @@ def run_a_star(difficulty=0, display_progress=False, time=None):
     print("Number of nodes in graph: {}".format(len(graph.nodes)))
     print("Number of states expanded: {}".format(searcher.expand_counter))
     print("Steps to solution: {}".format(len(searcher.solution)))
+    print("runtime: {}".format(t.time() - start))
     for node in searcher.solution:
         env.draw_state(node.state)
         sleep(time)
@@ -44,5 +47,5 @@ def simple_search(algorithm, difficulty):
         input()
 
 
-run_a_star(difficulty=0, time=.5, display_progress=True)
+run_a_star(difficulty=3, time=.5, display_progress=False)
 #simple_search(0, 3)
